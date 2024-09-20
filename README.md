@@ -27,8 +27,14 @@
 运行Docker，没有镜像会自动拉取镜像在运行的，默认端口是8000，需要改外面暴露的端口，请讲排在前面的8000修改为你需要的端口，第一次运行可能会比较慢，因为没有模型，需要自动下载最新的模型，后续速度就正常了。
 
 ```bash
-docker run -itd --name paddle_ocr_api -p 8000:8000 wufeihdt/paddle_ocr_api
+docker run -itd --name paddle_ocr_api -p 8000:8000 harbor.jsecode.com/library/paddle-ocr-api
 ```
+
+```bash
+docker build -t harbor.jsecode.com/library/paddle-ocr-api:1.0 .
+```
+
+
 
 ## request请求
 

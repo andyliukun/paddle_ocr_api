@@ -7,19 +7,16 @@ app = Sanic("ocr_api")
 
 
 def get_ocr_json(img):
-    # 模型路径下必须含有model和params文件，如果没有，现在可以自动下载了，不过是最简单的模型
     # use_gpu 如果paddle是GPU版本请设置为 True
-    ocr = PaddleOCR(use_angle_cls=True, use_gpu=False)
+    ocr = PaddleOCR(use_angle_cls=True, use_gpu=False, det=False, ocr_version="PP-OCRv4")
 
-    resultStr = ocr.ocr(img, cls=False).__str__()
-
-    result = re.findall(r'\((.*?)\)', resultStr)
+    result_str = ocr.ocr(img, cls=False).__str__()
+    result = re.findall(r'\((.*?)\)', result_str)
     return result
 
 
 def get_text_json(text):
     text_dict = {}
-
     for line in text:
         line_rep = line.replace('\'', '')
         index = line_rep.index(', ')
